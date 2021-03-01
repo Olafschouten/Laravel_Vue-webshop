@@ -23,9 +23,9 @@
 
       <p v-if="errors.length">
         <b>Please correct the following error(s):</b>
-        <ul>
-          <li v-for="error in errors">{{ error }}</li>
-        </ul>
+      <ul>
+        <li v-for="error in errors">{{ error }}</li>
+      </ul>
       </p>
 
       <p>
@@ -101,55 +101,55 @@
 
 <script>
 export default {
-  data() {
-    return {
-      fields: {},
-      errors: {},
-    };
-  },
-  methods: {
-    checkForm: function (e) {
-      if (
-        this.firstName &&
-        this.lastName &&
-        this.adress &&
-        this.zip &&
-        this.street &&
-        this.email
-      ) {
-        return true;
-      }
-
-      this.errors = [];
-
-      if (!this.firstName) {
-        this.errors.push("Fisrt name required.");
-      }
-      if (!this.lastName) {
-        this.errors.push("Last name required.");
-      }
-      if (!this.adress) {
-        this.errors.push("Adress required.");
-      }
-      if (!this.zip) {
-        this.errors.push("Zip required.");
-      }
-      if (!this.street) {
-        this.errors.push("Street + housenumber required.");
-      }
-      if (!this.email) {
-        this.errors.push("Email required.");
-      } else if (!this.validEmail(this.email)) {
-        this.errors.push("Valid email required.");
-      }
-
-      e.preventDefault();
+    data() {
+        return {
+            fields: {},
+            errors: {},
+        };
     },
-    validEmail: function (email) {
-      var re = /^(([^<>()[\]\\.,;:\s@"]+(\.[^<>()[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/;
-      return re.test(email);
+    methods: {
+        checkForm: function (e) {
+            if (
+                this.firstName &&
+                this.lastName &&
+                this.adress &&
+                this.zip &&
+                this.street &&
+                this.email
+            ) {
+                return true;
+            }
+
+            this.errors = [];
+
+            if (!this.firstName) {
+                this.errors.push('Fisrt name required.');
+            }
+            if (!this.lastName) {
+                this.errors.push('Last name required.');
+            }
+            if (!this.adress) {
+                this.errors.push('Adress required.');
+            }
+            if (!this.zip) {
+                this.errors.push('Zip required.');
+            }
+            if (!this.street) {
+                this.errors.push('Street + housenumber required.');
+            }
+            if (!this.email) {
+                this.errors.push('Email required.');
+            } else if (!this.validEmail(this.email)) {
+                this.errors.push('Valid email required.');
+            }
+
+            e.preventDefault();
+        },
+        validEmail: function (email) {
+            var re = /^(([^<>()[\]\\.,;:\s@"]+(\.[^<>()[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/;
+            return re.test(email);
+        },
     },
-  },
 };
 </script>
 

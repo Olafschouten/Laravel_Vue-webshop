@@ -2,15 +2,19 @@
 
 namespace App\Models;
 
+use Illuminate\Database\Eloquent\Collection;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
-use App\Models\Category;
+use Illuminate\Database\Eloquent\Relations\BelongsToMany;
 
 class Product extends Model
 {
     use HasFactory;
 
-    public function categories()
+    /**
+     * @return BelongsToMany
+     */
+    public function categories(): BelongsToMany
     {
         // Find better way!!!
         return $this->belongsToMany(
@@ -21,17 +25,28 @@ class Product extends Model
         )->withTimestamps();
     }
 
-    public static function getAll()
+    /**
+     * @return Product[]|Collection
+     */
+    public static function getAll(): Collection|array
     {
         return Product::all();
     }
 
-    public static function getOne($id)
+    /**
+     * @param $id
+     * @return mixed
+     */
+    public static function getOne($id): mixed
     {
         return Product::find($id);
     }
 
-    public static function getSpecificProduct($id)
+    /**
+     * @param $id
+     * @return mixed
+     */
+    public static function getSpecificProduct($id): mixed
     {
         // Find better way!!!
         return \DB::table('products AS p')

@@ -5,18 +5,18 @@ export default {
             errors: {},
             success: false,
             loaded: true,
-            action: ""
+            action: '',
         };
     },
     methods: {
         submit() {
-            Object.assign(this.fields, {cart: localStorage.getItem("cart")});
+            Object.assign(this.fields, { cart: localStorage.getItem('cart') });
 
             if (this.loaded) {
                 this.loaded = false;
                 this.success = false;
                 this.errors = {};
-                console.log(this.fields)
+                console.log(this.fields);
                 axios
                     .post(this.action, this.fields)
                     // .then(response => {
@@ -35,6 +35,6 @@ export default {
                         }
                     });
             }
-        }
-    }
+        },
+    },
 };

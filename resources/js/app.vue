@@ -1,20 +1,20 @@
 <template>
-    <div id="id">
-        <nav-bar></nav-bar>
-        <div class="container pt-3">
-            <router-view></router-view>
-        </div>
+  <div id="id">
+    <nav-bar></nav-bar>
+    <div class="container pt-3">
+      <router-view></router-view>
     </div>
+  </div>
 </template>
 
 <script>
-import NavBar from './components/NavBar'
-import {mapState} from "vuex";
+import NavBar from './components/NavBar';
+import {mapState} from 'vuex';
 
 export default {
-    name: "app",
+    name: 'app',
     components: {
-        NavBar
+        NavBar,
     },
 };
 </script>

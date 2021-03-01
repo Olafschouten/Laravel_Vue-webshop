@@ -20,13 +20,13 @@ class OrderFactory extends Factory
      *
      * @return array
      */
-    public function definition()
+    public function definition(): array
     {
         return [
-//            'user_id' => User::factory()->create()->id,
-//            'product_id' => Product::factory()->create()->id,
-//            'created_at' => now(),
-//            'updated_at' => now(),
+            //            'user_id' => User::factory()->create()->id,
+            //            'product_id' => Product::factory()->create()->id,
+            //            'created_at' => now(),
+            //            'updated_at' => now(),
         ];
     }
 }

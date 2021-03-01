@@ -4,12 +4,15 @@ namespace App\Models;
 
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
-use App\Models\User;
+use Illuminate\Database\Eloquent\Relations\BelongsTo;
 
 class Order extends Model
 {
     use HasFactory;
 
+    /**
+     * @var string[]
+     */
     protected $fillable = [
         'fullName',
         'streetHouseNumber',
@@ -21,32 +24,41 @@ class Order extends Model
         'updated_at',
         'cart',
     ];
+
     /**
      * @var mixed|string
      */
     private $cart;
+
     /**
      * @var mixed|string
      */
     private $user_id;
+
     /**
      * @var mixed|string
      */
     private $streetHouseNumber;
+
     /**
      * @var mixed|string
      */
     private $fullName;
+
     /**
      * @var mixed|string
      */
     private $zip;
+
     /**
      * @var mixed|string
      */
     private $email;
 
-    public function user()
+    /**
+     * @return BelongsTo
+     */
+    public function user(): BelongsTo
     {
         return $this->belongsTo(User::class);
     }

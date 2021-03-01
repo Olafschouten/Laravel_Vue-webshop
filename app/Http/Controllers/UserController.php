@@ -2,23 +2,31 @@
 
 namespace App\Http\Controllers;
 
+use App\Http\Resources\ProductResource;
 use App\Models\Order;
-use Illuminate\Support\Facades\Auth;
+use Illuminate\Http\Resources\Json\AnonymousResourceCollection;
 
 class UserController extends Controller
 {
-    public function getOrders()
+    /**
+     * @param $id
+     * @return AnonymousResourceCollection
+     */
+    public function getOrdersFromUser($id): AnonymousResourceCollection
     {
-        $user = Auth::user();
-        dd($user);
-        // $orders = Order::where('user_id', 1);
 
-        // $orders = Auth::user()->orders;
-        // $orders->transform(function ($order, $key) {
-        //     $order->cart = unserialize($order->cart);
-        //     return $order;
-        // });
+        $orders = Order::where('user_id', $id)->orderBy('created_at')->paginate(1);
+        //        if ($orders['data'] !== null) {
+        $orders->transform(function ($order, $key) {
+            $order->cart = json_decode($order->cart);
 
-//        return ["user" => $user->id];
+            return $order;
+        });
+
+        return ProductResource::collection($orders);
+
+        //        return response()->json($orders, 200);
+        //        }
+        //        return response()->json("No Order found", 200);
     }
 }

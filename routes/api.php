@@ -1,6 +1,7 @@
 <?php
 
 use App\Http\Controllers\CheckoutController;
+use App\Http\Controllers\UserController;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\ProductController;
@@ -19,3 +20,5 @@ Route::get('/categories', [CategoryController::class, 'index']);
 Route::get('/category/{id}', [CategoryController::class, 'showOne']);
 
 Route::post('/checkout', [CheckoutController::class, 'checkout']);
+
+Route::get('/order_history/{user_id}', [UserController::class, 'getOrdersFromUser']);

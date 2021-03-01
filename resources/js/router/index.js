@@ -1,100 +1,113 @@
-import Vue from "vue";
-import VueRouter from "vue-router";
-import Products from "../components/Products"
-import Categories from "../components/Categories"
-import Cart from "../components/Cart"
-import Checkout from "../components/Checkout"
-import Home from "../components/Home"
-import Profile from "../components/Profile"
-import Dashboard from "../components/Dashboard"
-import Login from "../components/Login"
-import SignUp from "../components/SignUp"
-import Category from "../components/Category"
-import Product from "../components/Product"
-import store from "../store";
+import Vue from 'vue';
+import VueRouter from 'vue-router';
+import Products from '../components/Products';
+import Categories from '../components/Categories';
+import Cart from '../components/Cart';
+import Checkout from '../components/Checkout';
+import Home from '../components/Home';
+import Profile from '../components/Profile';
+import Dashboard from '../components/Dashboard';
+import Login from '../components/Login';
+import SignUp from '../components/SignUp';
+import Category from '../components/Category';
+import Product from '../components/Product';
+import Order_History from '../vue_views/User/Order_History';
+import Page_Not_Found from '../vue_views/Error/Page_Not_Found';
+import store from '../store';
 
-Vue.use(VueRouter)
+Vue.use(VueRouter);
 
 const routes = [
     {
-        path: "/home",
+        path: '/home',
         component: Home,
-        Name: 'Home'
+        Name: 'Home',
     },
     {
-        path: "/products",
+        path: '/products',
         component: Products,
-        Name: 'Products'
+        Name: 'Products',
     },
     {
-        path: "/product/:id",
+        path: '/product/:id',
         component: Product,
-        Name: 'Product'
+        Name: 'Product',
     },
     {
-        path: "/categories",
+        path: '/categories',
         component: Categories,
-        Name: 'Categories'
+        Name: 'Categories',
     },
     {
-        path: "/category/:id",
+        path: '/category/:id',
         component: Category,
-        Name: 'Category'
+        Name: 'Category',
     },
     {
-        path: "/cart",
+        path: '/cart',
         component: Cart,
-        Name: 'Cart'
+        Name: 'Cart',
     },
     {
-        path: "/checkout",
+        path: '/checkout',
         component: Checkout,
         Name: 'Checkout',
-        meta: {authOnly: true}
+        meta: { authOnly: true },
     },
     {
-        path: "/",
+        path: '/',
         component: Home,
-        Name: 'Home'
+        Name: 'Home',
     },
     {
-        path: "/profile",
+        path: '/profile',
         component: Profile,
         Name: 'Profile',
-        meta: {authOnly: true}
+        meta: { authOnly: true },
     },
     {
-        path: "/dashboard",
+        path: '/dashboard',
         component: Dashboard,
         Name: 'Dashboard',
-        meta: {authOnly: true}
+        meta: { authOnly: true },
     },
     {
-        path: "/login",
+        path: '/login',
         component: Login,
         Name: 'Login',
-        meta: {guestOnly: true}
+        meta: { guestOnly: true },
     },
     {
-        path: "/signup",
+        path: '/signup',
         component: SignUp,
         Name: 'SignUp',
-        meta: {guestOnly: true}
+        meta: { guestOnly: true },
     },
-]
+    {
+        path: '/order_history',
+        component: Order_History,
+        Name: 'Order_History',
+        meta: { authOnly: true },
+    },
+    {
+        path: '*',
+        component: Page_Not_Found,
+        Name: 'Page_Not_Found',
+    },
+];
 
 const router = new VueRouter({
     // mode: 'history',
     base: process.env.BASE_URL,
-    routes
-})
+    routes,
+});
 
 router.beforeEach((to, from, next) => {
     if (to.matched.some(record => record.meta.authOnly)) {
         if (!store.state.auth.authenticated) {
             next({
-                path: "/login",
-                query: {redirect: to.fullPath}
+                path: '/login',
+                query: { redirect: to.fullPath },
             });
         } else {
             next();
@@ -102,8 +115,8 @@ router.beforeEach((to, from, next) => {
     } else if (to.matched.some(record => record.meta.guestOnly)) {
         if (store.state.auth.authenticated) {
             next({
-                path: "/dashboard",
-                query: {redirect: to.fullPath}
+                path: '/dashboard',
+                query: { redirect: to.fullPath },
             });
         } else {
             next();
@@ -111,6 +124,6 @@ router.beforeEach((to, from, next) => {
     } else {
         next();
     }
-})
+});
 
 export default router;
